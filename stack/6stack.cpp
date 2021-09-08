@@ -1,6 +1,7 @@
 // stock span problem: given input array of daily stock price, output array with # of days previously the stock price was lower than current price
 // https://leetcode.com/problems/online-stock-span/
 
+// TO FIND CONSECUTIVE SMALLER OR = ELEM BEFORE IT == NEAREST GREATER ELEMENT FROM LEFT
 // 100 80 60 70 60 75 85
 // 1   1  1  2  1  4  6
 // for 75: 60/70/60 and 75 itself
@@ -54,6 +55,6 @@ int main(){
         span.push_back(x-v1[x]);
         cout << span[x] << " ";
     }
-    
+
     return 0;
 }
