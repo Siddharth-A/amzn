@@ -40,8 +40,8 @@ int main(){
             left.push_back(s.top().second);
         }
         // s.top()>input[i]
-        else if(s.top().first>input[i]){
-            while(s.size()>0 && s.top().first>input[i]){
+        else if(s.top().first>=input[i]){
+            while(s.size()>0 && s.top().first>=input[i]){
                 s.pop();
             }
             if(s.size()==0){
@@ -69,8 +69,8 @@ int main(){
             right.push_back(s.top().second);
         }
         // s.top()>input[j]
-        else if(s.top().first>input[j]){
-            while(s.size()>0 && s.top().first>input[j]){
+        else if(s.top().first>=input[j]){
+            while(s.size()>0 && s.top().first>=input[j]){
                 s.pop();
             }
             if(s.size()==0){
