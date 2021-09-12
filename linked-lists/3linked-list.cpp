@@ -67,14 +67,14 @@ int main(){
     }
     
     while(m != NULL){
-        temp->next = new ListNode(m->val);
+        temp->next = m;
         m = m->next;
         temp = temp->next;
 
     }
 
     while(l != NULL){
-        temp->next = new ListNode(l->val);
+        temp->next = l;
         l = l->next;
         temp = temp->next;
     }
