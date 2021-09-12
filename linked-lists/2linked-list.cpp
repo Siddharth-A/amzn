@@ -49,12 +49,10 @@ int main(){
     
 // *********************************************** //
 
-// FIXME: extra empty node added in the end
-
     ListNode *l = l0;
     ListNode *m = m0;
-    ListNode *sol = new ListNode();
-    ListNode *curr = sol;
+    ListNode *temp = new ListNode();
+    ListNode *sol = temp;
     int x=0,y=0,carry=0,sum=0,count=0;
 
     while(l!=NULL || m!=NULL || carry){
@@ -64,21 +62,21 @@ int main(){
         
         sum = x+y+carry;
         carry = (x+y)/10;
-        // sol->val = sum % 10;
-        cout << sol->val << "   ";
+        // temp->val = sum % 10;
+        cout << temp->val << "   ";
         
         l = l->next;
         m = m->next;
-        sol->next = new ListNode(sum % 10);
-        sol = sol->next;
+        temp->next = new ListNode(sum % 10);
+        temp = temp->next;
 
         cout << x << " " << y << " " << carry << " " << sum << " " << endl;
     }
 
-    curr = curr->next;
-    while(curr != NULL){
-        cout << curr->val << " ";
-        curr = curr->next;
+    sol = sol->next;
+    while(sol != NULL){
+        cout << sol->val << " ";
+        sol = sol->next;
     }
 
     return 0;
