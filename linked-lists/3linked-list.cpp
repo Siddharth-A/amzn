@@ -25,6 +25,8 @@ int main(){
     ListNode *m0 = new ListNode();
     ListNode *m1 = new ListNode();
     ListNode *m2 = new ListNode();
+    ListNode *m3 = new ListNode();
+    ListNode *m4 = new ListNode();
 
     l0->val = 1;
     l0->next = l1;
@@ -38,7 +40,11 @@ int main(){
     m1->val = 3;
     m1->next = m2;
     m2->val = 4;
-    m2->next = NULL;
+    m2->next = m3;
+    m3->val = 5;
+    m3->next = m4;
+    m4->val = 8;
+    m4->next = NULL;
 // *********************************************** //
 
     ListNode* temp = new ListNode();
@@ -46,103 +52,43 @@ int main(){
     ListNode* l = l0;
     ListNode* m = m0;
 
-    while(l!=NULL || m!=NULL){
-        if(l == NULL){
-            temp->next = new ListNode(m->val);
-            m = m->next;
-            cout << "c3" << endl;
-            // break;
-        }
-        else if(m == NULL){
+    while(l!=NULL && m!=NULL){
+        if(l->val <= m->val){
             temp->next = new ListNode(l->val);
             l = l->next;
-            cout << "c4" << endl;
-            // break;
-        }
-        else if(l->val <= m->val){
-            temp->next = new ListNode(l->val);
-            l = l->next;
-            cout << "c1" << endl;
-            // break;
+            // cout << "c1 ";
         }
         else if(l->val > m->val){
             temp->next = new ListNode(m->val);
             m = m->next;
-            cout << "c2" << endl;
-            // break;
+            // cout << "c2 ";
         }
         temp = temp->next;
+        // cout << temp->val << endl;
+
+    }
+    
+    while(m != NULL){
+        temp->next = new ListNode(m->val);
+        m = m->next;
+        // cout << "c3 ";
+        temp = temp->next;
+        // cout << temp->val << endl;
     }
 
-    if(l==NULL && m==NULL){
-        temp->next = NULL;
+    while(l != NULL){
+        temp->next = new ListNode(l->val);
+        l = l->next;
+        // cout << "c4 ";
+        temp = temp->next;
+        // cout << temp->val << endl;
     }
 
     sol = sol->next;
-
-    while(sol!=NULL){
+    while(sol != NULL){
         cout << sol->val << " ";
+        sol = sol->next;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // doesnt work when last elements are equal and l and m are both NULL!
-//     while(l!=NULL && m!=NULL){
-//         if(l->val <= m->val){
-//             temp->next = new ListNode(l->val);
-//             cout << "l " << l->val << endl;
-//             l = l->next;
-//         }
-//         else if(l->val > m->val){
-//             temp->next = new ListNode(m->val);
-//             cout << "m " << m->val << endl;
-//             m = m->next;
-//         }
-
-//         // cout << " " << temp->val << " ";
-//         // temp = temp->next;
-//     }
-
-//     while(m != NULL){
-//         temp->next = new ListNode(m->val);
-//         temp = temp->next;
-//         temp->next = m->next;
-//         m = m->next;
-//     }
-//     while(l != NULL){
-//         temp->next = new ListNode(l->val);
-//         temp = temp->next;
-//         temp->next = l->next;
-//         l = l->next;
-//     }
-    
-//     sol = sol->next;
-//     while(sol!=NULL){
-//         cout << sol->val << " ";
-//     }
 
     return 0;
 }
