@@ -13,6 +13,8 @@ using namespace std;
 struct ListNode{
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
 };
 
 // class ListNode{
@@ -62,18 +64,18 @@ int main(){
         
         sum = x+y+carry;
         carry = (x+y)/10;
-        sol->val = sum % 10;
+        // sol->val = sum % 10;
         cout << sol->val << "   ";
         
         l = l->next;
         m = m->next;
-        sol->next = new ListNode();
+        sol->next = new ListNode(sum % 10);
         sol = sol->next;
 
         cout << x << " " << y << " " << carry << " " << sum << " " << endl;
     }
 
-
+    curr = curr->next;
     while(curr != NULL){
         cout << curr->val << " ";
         curr = curr->next;
