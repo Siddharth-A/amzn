@@ -56,32 +56,27 @@ int main(){
         if(l->val <= m->val){
             temp->next = new ListNode(l->val);
             l = l->next;
-            // cout << "c1 ";
         }
         else if(l->val > m->val){
             temp->next = new ListNode(m->val);
             m = m->next;
-            // cout << "c2 ";
         }
         temp = temp->next;
-        // cout << temp->val << endl;
+
 
     }
     
     while(m != NULL){
         temp->next = new ListNode(m->val);
         m = m->next;
-        // cout << "c3 ";
         temp = temp->next;
-        // cout << temp->val << endl;
+
     }
 
     while(l != NULL){
         temp->next = new ListNode(l->val);
         l = l->next;
-        // cout << "c4 ";
         temp = temp->next;
-        // cout << temp->val << endl;
     }
 
     sol = sol->next;
