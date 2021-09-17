@@ -12,7 +12,7 @@
 using namespace std;
 
 int main(){
-    vector<char> input {'a','c','f','h','j','l','m'};
+    vector<char> input {'a','b','c','f','h','j','l','m'};
     char target='m';
 
     int start=0,end,mid=0,result;
@@ -32,7 +32,12 @@ int main(){
         else if(target == input[mid]){
             start=mid+1;
         }
-        
+
+        if(end>=input.size() || start >=input.size()){
+            res=input[0];
+            break;
+        }
+
     }
 
     cout << res << endl;
