@@ -13,7 +13,7 @@ using namespace std;
 int main(){
     // vector<int> input{5,10,30,20,40};
     vector<int> input{1,2,3,4,8,10,10,12,19};
-    int target=20;
+    int target=0;
     int start=0,mid=0,result=0;
     int end=input.size()-1;
 
