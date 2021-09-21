@@ -1,6 +1,6 @@
 //*****************************************************************************
-//* Program Name: COMP1411
-//* By Your Name: Shalley Singh
+//* Program Name: convert.txt
+//* Your Name: Shalley Singh
 //* Your ID: ssingh87
 //* Date: 20/09/2021
 //*
@@ -17,17 +17,12 @@
 //*****************************************************************************
 
 
-    // STEP 1:
-    // declare input variables: feet,inch;
-    // declare output variables: meter,centimeter;
+    STEP 1: declare input variables: feet,inch & output variables: meter,centimeter
 
-    // STEP 2:
-    // print "Please enter the height in feet and inch: "
-    // scan height input into feet and inch variables
+    STEP 2: print "Please enter the height in feet and inch: "
+    STEP 3: scan height input into feet and inch variables
 
-    // STEP 3:
-    // convert feet to meters using equation: meter=0.3048*feet
-    // convert inch to cm using equation: centimeter=2.54*inch
+    STEP 4: convert feet to meters using equation: meter=0.3048*feet
+    STEP 5: convert inch to cm using equation: centimeter=2.54*inch
 
-    // STEP 4:
-    // print output.
+    STEP 6: print output.

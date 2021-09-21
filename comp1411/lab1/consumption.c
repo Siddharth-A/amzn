@@ -1,6 +1,6 @@
 //*****************************************************************************
-//* Program Name: COMP1411
-//* By Your Name: Shalley Singh
+//* Program Name: consumption.c
+//* Your Name: Shalley Singh
 //* Your ID: ssingh87
 //* Date: 21/09/2021
 //*
