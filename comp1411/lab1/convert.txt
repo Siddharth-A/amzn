@@ -1,0 +1,33 @@
+//*****************************************************************************
+//* Program Name: COMP1411
+//* By Your Name: Shalley Singh
+//* Your ID: ssingh87
+//* Date: 20/09/2021
+//*
+//* Inputs: 
+//* feet  - stores height in feet input by user
+//* inch  - stores height in inch input by user
+//*           
+//*
+//* Outputs: 
+//* meter       - stores converted feet input into meter
+//* centimeter  - stores converted inch input into cm
+//*
+//* This program converts height given in feet and inches to meters and centimeters
+//*****************************************************************************
+
+
+    // STEP 1:
+    // declare input variables: feet,inch;
+    // declare output variables: meter,centimeter;
+
+    // STEP 2:
+    // print "Please enter the height in feet and inch: "
+    // scan height input into feet and inch variables
+
+    // STEP 3:
+    // convert feet to meters using equation: meter=0.3048*feet
+    // convert inch to cm using equation: centimeter=2.54*inch
+
+    // STEP 4:
+    // print output.
