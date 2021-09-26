@@ -151,7 +151,7 @@ int main(){
 
     // PASS BY POINTER: copies address of arg into func param
     // values changed inside func change actual params
-    // passbyadress(&x, &y)
+    // passbypointer(&x, &y)
     void passbypointer(int *x, int *y){
         int z=*x;
         *x=*y;
