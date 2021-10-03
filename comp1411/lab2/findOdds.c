@@ -18,8 +18,6 @@
 int main(void){
     // declare input variables
     int first_num=0,second_num=0;
-    // declare output variables
-    float area=0;
 
     // printf & scanf statements to ask for input and store in variables
     printf("Enter the first number: ");
