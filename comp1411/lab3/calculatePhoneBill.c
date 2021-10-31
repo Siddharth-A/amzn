@@ -5,10 +5,12 @@
 //* Date: 11/10/2021
 //*
 //* Inputs: 
-//* mins    - minutes of phone call used input by user
+//* mins            - minutes of phone call used input by user
+//* account number# - maccount number of the plan input by user
+//* phone plan      - premium or regular plan input by user
 //*           
 //* Outputs: 
-//* balance - represents the calculated outstanding balance for the user
+//* balance         - represents the calculated outstanding balance for the user
 //*
 //* This program calculates and displays the balance/bill, account number, 
 //* and minutes usage when the user inputs the minutes of phone call. 
