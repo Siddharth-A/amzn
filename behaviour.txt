@@ -9,7 +9,6 @@ R:  result      (outcome of your steps)
 ***************************************************************************
 * enormous pressure/biggest accomplishment/difficult challenge you solved *
 ***************************************************************************
-
 - one of the many difficult tasks that i was assigned was the feature enablement of HDMI2.1
 - for context hdmi2.1 is a new hdmi standard and back in 2019 there was not a single hdmi2.1 monitor on market
 - hardware to test feature was difficult to procure. only two machines TD QD980 and realtek prototype
@@ -26,11 +25,9 @@ A: contacted the manufacturer of testing equipment for detailed manual. audio ve
 R: was able to verify hdmi2.1 audio as well as debug missing metadata and file a ticket with mfr for reference.
    was awarded a spotlight award for my efforts as well
 
-
 ********************************************************
 * misscommunication/butted heads/trouble with teammate *
 ********************************************************
-
 - for each project at AMD, we do something called a bringup. in bringup, the goal of the organization is to 
 complete verification of all sanity tests and verify as much as you can as fast as you can because the aim is to 
 give the fab a thumbs up and say yes this chip is how we designed it to be. 
@@ -47,8 +44,6 @@ A: setup a meeting with the project manager, my manager, ver eng and his manager
 
 R: was able to achieve bringup exit within the alloted time line and achieve the team goals 
 
-
-
 **********
 * why GM *
 **********
@@ -64,12 +59,9 @@ and lastly i was impressed with factory zero which is also in line for zero cras
 will serve as the hq for all electric vehicles in future. so with all these reasons in mind, i would love 
 to join gm 
 
-
-
 **********************************************************************************
 * tell me about a time you had to quickly change work priorities to meet demand? *
 **********************************************************************************
-
 in my current role, i am the assigned point of contact for all dGPU projects. with each new release of projects,
 there comes different versions of the project to denote different form factors and capabilities. 
 
@@ -84,12 +76,9 @@ A: i communicate the ticket to my manager via email and mention that depending o
 R: most of the times, I am able to resolve the goals within 1-2 days so they dont gain high visibility. have also 
    created a tool called DRA which when you input the version of project should display the test cases which are valid. 
 
-
-
 ***************************************************************************************
 * tell me about a time you recieved negative feedback from manager and your response? *
 ***************************************************************************************
-
 in celestica, one of the responsibilities of my role as a test development engineer was procurement of off the shelf hardware.
 had to work multiple vendors and ensure the product came in in a timely manner for all porjects. 
 
@@ -104,11 +93,9 @@ was placed on order. in the end issue was not that the procurement was taking lo
 the communication with my manager on the status of materials and creating the excel sheet helped over come that and i recieved a pat on
 my back for my efforts
 
-
 **************************************************
 * Your greatest accomplishment in your work life *
 **************************************************
-
 S: test passing individually but when run as part of system level test, it would fail intermittently. 5/100 times
 
 T: i along with a senior engineer were tasked with debugging the process
@@ -124,9 +111,15 @@ R: based on info above, was able to successfully triage to the correct team and 
 
 
 
-
-
-
+****************
+* GM INTERVIEW *
+****************
+1. why GM? 
+2. tell me about a time when you had a learn a new skill on the fly at work
+3. tell me about a time when you had to show honesty and integrity in your work
+4. tell me about a time you worked on a project where one or more than one engineers were unwilling to put their work in
+5. 
+-> each question was followed up with a more in depth question and i was asked about my lessons learnt and if i would do something different or not
 
 1. in your department, how does a promotion to next level work for the engineer? 
 2. what is the current head count of engineers the team currently has?
