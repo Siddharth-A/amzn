@@ -1,13 +1,13 @@
 //*****************************************************************************
-//* Program Name: name_extract.c
+//* Program Name: studentGrade.c
 //* Your Name: Shalley Singh
 //* Your ID: 1130765
-//* Date: 27/11/2021
+//* Date: 25/11/2021
 //*
 //* Inputs: data.txt file which contains the following parameters
 //* name[][]     - names of 6 students which are stored in the 2D array: name
 //* test1[]      - score of the students in test 1 which are stored in 1D array: test1
-//* test2[]      - score of the students in test 2 which are stored in 1D array: test1
+//* test2[]      - score of the students in test 2 which are stored in 1D array: test2
 //*           
 //* Outputs: 
 //* none
