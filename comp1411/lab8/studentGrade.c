@@ -4,17 +4,20 @@
 //* Your ID: 1130765
 //* Date: 27/11/2021
 //*
-//* Inputs: 
-//* email[200]     - input array used to store the email ID entered by user
-//* user           - users input to the question "Try again[Y/N]"
+//* Inputs: data.txt file which contains the following parameters
+//* name[][]     - names of 6 students which are stored in the 2D array: name
+//* test1[]      - score of the students in test 1 which are stored in 1D array: test1
+//* test2[]      - score of the students in test 2 which are stored in 1D array: test1
 //*           
 //* Outputs: 
 //* none
 //*
 //* This program does the following:
-//*     i. asks user to enter an email ID
-//*    ii. splits the ID into first name and last name based on char:- "."
-//*   iii. capitalizes the first and last name and prints it
+//*     i. reads data.txt file and stores the data in 3 arrays: name[][], test1[] and test2[]
+//*    ii. calculate the average grade of the student based on test1 and test2 score and store in average[]
+//*   iii. sort name, test1 and test2 arrays based on average array in descending order
+//*    iv. print the data processed on the terminal
+//*     v. print the top scorer based on the highest average score
 //*****************************************************************************
 
 #include <stdio.h>
@@ -25,6 +28,13 @@
 /*
 Purpose         : reads the name and scores from two tests for each student 
                   and store names in char array and grades in double array
+Input           :    
+                name array:  char array of all student names
+                test1 array: int array of student's score in test1
+                test2 array: int array of student's score in test2
+
+Output/Returns  :
+                none
 */
 void getRecord(char name[][10], int *test1, int *test2){
 
@@ -40,11 +50,19 @@ void getRecord(char name[][10], int *test1, int *test2){
     while(fscanf(data, "%s %d %d",name[i],&test1[i],&test2[i]) != EOF){
         i++;
     }
+    fclose(data);
 }
 
 
 /*
-Purpose         : recieves the two grade arrays and calculates the average score
+Purpose         : recieves the two grade arrays and calculates the average score and store in array
+Input           :    
+                test1 array: int array of student's score in test1
+                test2 array: int array of student's score in test2
+                average array: float array of the avg score of student based on test1 and test2
+
+Output/Returns  :
+                none
 */
 void calculateAverageGrade(int *test1, int *test2, float *average){
     
@@ -55,7 +73,15 @@ void calculateAverageGrade(int *test1, int *test2, float *average){
 
 
 /*
-Purpose         : recieves and sorts the grade array in descending order
+Purpose         : recieves and sorts test1,test2 and name array by sorting average array in descending order using bubble sort
+Input           :
+                name array:  char array of all student names    
+                test1 array: int array of student's score in test1
+                test2 array: int array of student's score in test2
+                average array: float array of the avg score of student based on test1 and test2
+
+Output/Returns  :
+                none
 */
 void sortRecord(char name[][10], int *test1, int *test2, float *average){
     
@@ -79,6 +105,7 @@ void sortRecord(char name[][10], int *test1, int *test2, float *average){
                 test2[j] = test2[j+1];
                 test2[j+1] = swaptest2;
 
+                // need string copy function for this
                 // swapname = name[j];
                 strcpy(swapname,name[j]);
                 // *name[j] = *name[j+1];
@@ -93,6 +120,14 @@ void sortRecord(char name[][10], int *test1, int *test2, float *average){
 
 /*
 Purpose         : displays the student names, grade scores and average score in descending order
+Input           :
+                name array:  char array of all student names    
+                test1 array: int array of student's score in test1
+                test2 array: int array of student's score in test2
+                average array: float array of the avg score of student based on test1 and test2
+
+Output/Returns  :
+                none
 */
 void printRecord(char name[][10], int *test1, int *test2, float *average){
 
@@ -106,6 +141,12 @@ void printRecord(char name[][10], int *test1, int *test2, float *average){
 
 /*
 Purpose         : displays the top average scorer of both exams
+Input           :
+                name array:  char array of all student names    
+                average array: float array of the avg score of student based on test1 and test2
+
+Output/Returns  :
+                none
 */
 void displayTopScorer(char name[][10], float *average){
     
@@ -118,6 +159,7 @@ void displayTopScorer(char name[][10], float *average){
         printf("%s\n", name[i]);
         i++;
 
+        // if more than 1 high scores
         if(top_avg == average[i]){
             status = true;
         }
@@ -132,7 +174,6 @@ int main(void){
     int test1[6];
     int test2[6];
     char name[6][10];
-    char name_ordered[6][10];
     float average[6];
 
     getRecord(name,test1,test2);
