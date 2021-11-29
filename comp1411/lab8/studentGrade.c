@@ -21,6 +21,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+
 /*
 Purpose         : reads the name and scores from two tests for each student 
                   and store names in char array and grades in double array
@@ -45,21 +46,21 @@ void getRecord(char name[][10], int *test1, int *test2){
 /*
 Purpose         : recieves the two grade arrays and calculates the average score
 */
-void calculateAverageGrade(int *test1, int *test2, int *average){
+void calculateAverageGrade(int *test1, int *test2, float *average){
     
     for(int i=0;i<6;i++){
         average[i] = (test1[i]+test2[i])/2;
     }
 }
 
+
 /*
 Purpose         : recieves and sorts the grade array in descending order
 */
-sortRecord(int *test1, int *test2, int *average){
+void sortRecord(char name[][10], int *test1, int *test2, float *average){
     
     int swapavg=0, swaptest1=0, swaptest2=0;
-    
-
+    char swapname[10];
     int size=6;
 
     for(int i=0; i<size-1; i++){
@@ -77,70 +78,68 @@ sortRecord(int *test1, int *test2, int *average){
                 swaptest2 = test2[j];
                 test2[j] = test2[j+1];
                 test2[j+1] = swaptest2;
+
+                // swapname = name[j];
+                strcpy(swapname,name[j]);
+                // *name[j] = *name[j+1];
+                strcpy(name[j],name[j+1]);
+                // name[j+1] = swapname;
+                strcpy(name[j+1],swapname);
             }
         }
     }
-
 }
+
 
 /*
-Purpose         : re-reads the file to fetch the correct name
+Purpose         : displays the student names, grade scores and average score in descending order
 */
-sortNameRecord(int *test1, int *test2, char name_ordered[][10]){
+void printRecord(char name[][10], int *test1, int *test2, float *average){
 
-    int i=0, t1=0, t2=0;
-    char name[10];
-    
-    FILE *data;
-    data = fopen("data.txt","r");
-    if(data == NULL){
-            printf("Error in file opening\n");
-            return;
-    }
-
-    while(fscanf(data, "%s %d %d",name,&t1,&t2) != EOF){
-        
-        i++;
+    printf("Student Exam Record\n");
+    printf("%-10s %10s %10s %10s\n","Name", "Exam One", "Exam Two", "Average");
+    for (int i=0;i<6;i++){
+        printf("%-10s %10d %10d %10.2f\n",name[i],test1[i],test2[i],average[i]);
     }
 }
 
-// /*
-// Purpose         : displays the student names, grade scores and average score in descending order
-// */
-// printRecord(){
 
-// }
+/*
+Purpose         : displays the top average scorer of both exams
+*/
+void displayTopScorer(char name[][10], float *average){
+    
+    int i = 0;
+    float top_avg = average[i];
+    bool status = true;
+    printf("\nTop Scorer\n");
 
-// /*
-// Purpose         : displays the top average scorer of both exams
-// */
-// displayTopScorer(){
+    while(status){
+        printf("%s\n", name[i]);
+        i++;
 
-// }
+        if(top_avg == average[i]){
+            status = true;
+        }
+        else{
+            status = false;
+            return;
+        }
+    }
+}
 
 int main(void){
     int test1[6];
     int test2[6];
     char name[6][10];
     char name_ordered[6][10];
-    int average[6];
+    float average[6];
 
     getRecord(name,test1,test2);
-    calculateAverageGrade(test1,test2,average);
-    // for (int i=0;i<6;i++)
-    //     printf("%s %d %d %d\n",name[i],test1[i],test2[i],average[i]);
-    
-    // printf("#########################\n");
-    sortRecord(test1,test2,average);
-    sortNameRecord(test1,test2,name_ordered)
-
-
-    // for (int i=0;i<6;i++)
-    //     printf("%s %d %d %d\n",name[i],test1[i],test2[i],average[i]);
-
-            
-    
-
+    calculateAverageGrade(test1,test2,average);    
+    sortRecord(name,test1,test2,average);
+    printRecord(name,test1,test2,average);
+    displayTopScorer(name,average);
 
     return 0;
 }
