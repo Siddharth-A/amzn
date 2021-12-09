@@ -1,0 +1,6 @@
+Cersie 22 16
+Arya 90 96
+Ramsay 3 5
+Daenerys 90 35
+Jon 93 93
+Theon 60 85
