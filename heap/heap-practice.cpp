@@ -135,6 +135,24 @@ void kclosetoorigin(vector <vector<int>>& nums, int k){
     cout << endl;
 }
 
+void connectnropes(vector<int>& nums){
+    int cost=0,new_rope=0,rope1=0,rope2=0;
+    priority_queue<int, vector<int>, greater<int>> minheap;
+    for(auto i:nums){
+        minheap.push(i);
+    }
+    while (minheap.size()>1){
+        rope1=minheap.top();
+        minheap.pop();
+        rope2=minheap.top();
+        minheap.pop();
+        new_rope=rope1+rope2;
+        minheap.push(new_rope);
+        cost = cost + new_rope;
+    }
+    cout << "Total cost to connect ropes: " << cost << endl;
+}
+
 int main(){
     vector <int> nums1 = {7,10,4,3,20,15};
     vector <int> nums2 = {6,5,3,2,8,10,9};
@@ -146,6 +164,7 @@ int main(){
         {5,-1},
         {-2,4}
     };
+    vector <int> num6 = {1,5,3,6,4,8}; //app1: 6+9+15+19+27=76 app2:4+8+13+19+27=71
     
     int k = 2;
     int x = 4;
@@ -155,6 +174,6 @@ int main(){
     // kclosestelements(nums3, k, x);   //5
     // kfrequentnumbers(nums4, k);      //6
     // sortarraybyfreq(nums4);          //7 (TODO: answer is 14,13,4,7,3,12,2,1,9)
-    kclosetoorigin(nums5, k);
-
+    // kclosetoorigin(nums5, k);        //8
+    // connectnropes(num6);             //9 (trick is to add 2 smallest ropes)
 }
