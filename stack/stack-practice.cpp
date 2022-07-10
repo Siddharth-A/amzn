@@ -7,6 +7,7 @@
 
 // NGR: nearest greatest right (reverse)
 // NGL: nearest greatest left
+// stack questions time complexity: O(n) (NOTE: stack time complexity by itself is O(1))
 
 #include <functional>
 #include <queue>
@@ -143,12 +144,48 @@ void nextsmallestelement(vector<int> input){
     cout << endl;
 }
 
+void stockspanproblem(vector<int> input){
+    // find # of days stock was lower prior
+    // above => next greater left (NGL)
+    // look at index of vector
+    stack<pair<int,int>> s;
+    vector<int> sol;
+
+    for(int i=0; i<=input.size()-1;i++){
+        // case1: stack is empty
+        if (s.size()==0)
+            sol.push_back(-1);
+
+        // case2: stack.top() > input[i]
+        else if(s.size()>0 && s.top().first > input[i])
+            sol.push_back(s.top().second);
+
+        // case3: stack.top() <= input[i]
+        else if(s.size()>0 && s.top().first <= input[i]){
+            while(s.size()>0 && s.top().first <= input[i])
+                s.pop();
+            if(s.size()==0)
+                sol.push_back(-1);
+            else if(s.top().first > input[i])
+                sol.push_back(s.top().second);
+        }
+
+        s.push(make_pair(input[i],i));
+    }
+    for(int j=0;j<=sol.size()-1;j++)
+        cout << j - sol[j] << " ";
+    cout << endl;
+
+}
 int main()
 {
     vector<int> input1={1,3,0,0,1,2,4};
+    vector<int> input2={100,80,60,70,60,75,85};
+
     // nextgreatestelement(input1);         //1 (NGR)(NGE)(start from reverse array)
     // previousgreatestelement(input1);     //2 (NGL)(PGE)
     // previoussmallestelement(input1);     //3 (NSL)(PSE)
     // nextsmallestelement(input1);         //4 (NSR)(NSE)(start from reverse array)
+    // stockspanproblem(input2);            //5
     return 0;
 }
