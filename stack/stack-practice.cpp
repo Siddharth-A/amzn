@@ -5,8 +5,8 @@
 // 5 https://leetcode.com/problems/online-stock-span/
 // 
 
-// NGR: nearest greatest right NGE: next greatest element
-// NGL: nearest greatest left  PGE: previous greatest element
+// NGR: nearest greatest right (reverse)
+// NGL: nearest greatest left
 
 #include <functional>
 #include <queue>
@@ -148,7 +148,7 @@ int main()
     vector<int> input1={1,3,0,0,1,2,4};
     // nextgreatestelement(input1);         //1 (NGR)(NGE)(start from reverse array)
     // previousgreatestelement(input1);     //2 (NGL)(PGE)
-    previoussmallestelement(input1);     //3 (NSL)(PSE)
+    // previoussmallestelement(input1);     //3 (NSL)(PSE)
     // nextsmallestelement(input1);         //4 (NSR)(NSE)(start from reverse array)
     return 0;
 }
