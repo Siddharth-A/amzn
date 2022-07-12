@@ -179,7 +179,7 @@ void stockspanproblem(vector<int> input){
 
 }
 
-void maximumareahistogram(vector<int> input){
+int maximumareahistogram(vector<int> input){
     // create NSL and NSR vectors
     // points where the current bar discontinues = width = (NSR-NSL-1)
     // area = width*input[i]
@@ -251,7 +251,39 @@ void maximumareahistogram(vector<int> input){
             max=area[x];
     }
     cout << endl;
+    return max;
 
+}
+
+void maximalrectangle(vector<vector<int>> input){
+    // break MxN matrix down into M vectors with N elements each
+    // think of each row as = row2 hist = row1+row2
+    // if row2 element is 0 corresponding row2 hist col=0
+    // do MAH on this 
+    // ex r1: 0 1 1 0
+    //    r2: 1 1 1 1
+    //    r3: 1 1 0 0 
+    vector<int> sol;
+    int max=0;
+    for(int i=0;i<input.size();i++){
+        for(int j=0;j<input[i].size();j++){
+            // row 0
+            if(i==0)
+                sol.push_back(input[i][j]);
+            // all other rows
+            else if(i>0){
+                // if elem=0
+                if(input[i][j]==0)
+                    sol[j]=0;
+                else if(input[i][j]==1)
+                    sol[j] = sol[j]+1;
+            }
+        }
+        if(max < maximumareahistogram(sol))
+            max = maximumareahistogram(sol);
+        cout << max << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -259,12 +291,21 @@ int main()
     vector<int> input1={1,3,0,0,1,2,4};
     vector<int> input2={100,80,60,70,60,75,85};
     vector<int> input3={6,2,5,4,5,1,6};
+    vector<vector<int>> matrix
+    {
+        {0,1,1,0},
+        {1,1,1,1},
+        {1,1,1,1},
+        {1,1,0,0}
+    };
 
     // nextgreatestelement(input1);         //1 (NGR)(NGE)(start from reverse array)
     // previousgreatestelement(input1);     //2 (NGL)(PGE)
     // previoussmallestelement(input1);     //3 (NSL)(PSE)
     // nextsmallestelement(input1);         //4 (NSR)(NSE)(start from reverse array)
     // stockspanproblem(input2);            //5
-    maximumareahistogram(input3);       //6
+    // maximumareahistogram(input3);        //6
+    // maximalrectangle(matrix);            //7
+
     return 0;
 }
