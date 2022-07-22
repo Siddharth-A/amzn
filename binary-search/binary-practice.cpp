@@ -6,9 +6,9 @@
 // 9  https://www.geeksforgeeks.org/search-almost-sorted-array/
 // 10 https://www.geeksforgeeks.org/floor-in-a-sorted-array/
 // 12 https://leetcode.com/problems/find-smallest-letter-greater-than-target/
-// 13
-// 14
-// 15
+// 13 https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
+// 14 https://www.geeksforgeeks.org/find-index-first-1-sorted-array-0s-1s/
+// 15 minimum difference element in sorted array: Given a sorted array, find the element in the array which has minimum difference with the given number
 // 16
 // 17
 // 18
@@ -16,10 +16,12 @@
 
 /*!
 * \brief -  if input is sorted in ascending/descening manner, then binary search is always warranted
+* time complexity:  O(log2N)
+* space complexity: o(1) 
 
-step 1: figure out when code should stop (while loop)
-step 2: figure out triggers for code to go left or right
-step 3: check for edge cases 
+* step 1: figure out when code should stop (while loop)
+* step 2: figure out triggers for code to go left or right
+* step 3: check for edge cases 
 */
 
 #include <functional>
@@ -235,6 +237,105 @@ void nextgreatestletter(vector<char> input, char target){
     cout << "ceiling of target " << target << " is: " << temp << endl;
 }
 
+int simplebinarysearch2(vector<int> input, int target, int start, int end){
+    int mid = 0;
+
+    while(start <= end){
+        mid = start + (end-start)/2;
+        if(target < input[mid])
+            end = mid-1;
+
+        else if(target > input[mid])
+            start = mid+1;
+
+        else if(target == input[mid]){
+            cout << "target: " << input[mid] << " index: " << mid << endl;
+            break;
+        }
+    }
+    return mid;
+}
+
+
+void findininfinitearray(vector<int> input, int target){
+    int start=0; int mid=0; int end=1;
+    int temp;
+    int r;
+    int i=0;
+    temp = input[0];
+
+    if(temp == target){
+        cout << "target element " << target << " located at: 0" << endl;
+        return;
+    }
+    while(temp < target){
+        cout << "it: " << i << endl;
+        start = end;
+        end = 2*end;
+        temp=input[end];
+        i++;
+        r=simplebinarysearch2(input, target, start, end);
+
+        if(input[r] == target){
+            cout << "target element " << target << " located at: " << r << endl;
+            return;
+        }
+    }
+
+}
+
+void searchbinaryarray(vector<int> input){
+    int start=0; int mid=0; int end=input.size()-1;
+    int result=0; int i=1;
+
+    while(start <= end){
+        mid=start+(end-start)/2;
+
+        if(input[mid]==1){
+            if(input[mid-1]==0){
+                result=mid;
+                break;
+            }
+            else if(input[mid-1]==1)
+                end=mid-1;
+        }
+
+        else if(input[mid]==0)
+            start=mid+1;
+        
+        i++;
+    }
+    cout << "index of first 1: " << result << endl;
+}
+
+void closestelement(vector<int> input, int target){
+    // do simple binary search to see if target in input
+    // create special case for if target not in input because
+    // once while exits, start and end point to immediate neighbours of mid
+    int start=0; int mid=0; int end=input.size()-1;
+
+    while(start<=end){
+        mid=start+(end-start)/2;
+        if(target < input[mid])
+            end=mid-1;
+
+        else if(target > input[mid])
+            start=mid+1;
+
+        else if(target == input[mid]){
+            cout << "closest element to target " << target << " is: " << input[mid] << endl;
+            break;
+        }
+    }
+    if(start>end){
+        if(abs(input[start]-target) > abs(input[end]-target))
+            cout << "closest element to target " << target << " is: " << input[end] << endl;
+        else
+            cout << "closest element to target " << target << " is: " << input[start] << endl;
+
+    }
+}
+
 int main(){
     vector<int> input1 = {-1,0,3,5,9,12};
     int t1 = 12;
@@ -246,11 +347,12 @@ int main(){
     int t4 = 10;
     vector<int> input5{11,12,15,18,2,5,6,8};
     vector<int> input6{10,3,40,20,50,80,70};
-    int t6 = 40;
+    int t6 = 80;
     vector<int> input7{1,2,3,4,8,10,10,12,19};
     int t7=18;
     vector<char> input8{'a','b','c','f','h','j','l','m'};
     char t8='g';
+    vector<int> input9{0,0,0,0,0,0,1,1,1,1};
 
     // int x = simplebinarysearch(input1, t1);      // 1
     // int y = reversebinarysearch(input2, t2);     // 2
@@ -260,6 +362,10 @@ int main(){
     // nearlysortedarray(input6, t6);               // 9
     // floorofelement(input7,t7);                   // 10
     // nextgreatestletter(input8, t8);              // 12
+    // findininfinitearray(input6,t6);              // 13 (TODO: does not work)
+    // searchbinaryarray(input9);                   // 14
+    // closestelement(input7,t7);                   // 15
+    
 
     return 0;
 }
