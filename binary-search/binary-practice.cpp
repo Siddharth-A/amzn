@@ -1,13 +1,11 @@
-// 1 https://leetcode.com/problems/binary-search/
-// 2 reverse binary search
-// 4 https://www.geeksforgeeks.org/order-agnostic-binary-search/
-// 5 https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
-// 7 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
-// 8
-// 9
-// 10
-// 11
-// 12
+// 1  https://leetcode.com/problems/binary-search/
+// 2  reverse binary search
+// 4  https://www.geeksforgeeks.org/order-agnostic-binary-search/
+// 5  https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+// 7  https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+// 9  https://www.geeksforgeeks.org/search-almost-sorted-array/
+// 10 https://www.geeksforgeeks.org/floor-in-a-sorted-array/
+// 12 https://leetcode.com/problems/find-smallest-letter-greater-than-target/
 // 13
 // 14
 // 15
@@ -154,6 +152,89 @@ void rotatedarrayminelem(vector<int> input){
 
 }
 
+void nearlysortedarray(vector<int> input, int target){
+    int start=0;
+    int mid=0;
+    int prev=0;
+    int next=0;
+    int end=input.size()-1;
+
+    while(start<=end){
+        mid=start+(end-start)/2;
+        prev=mid-1;
+        next=mid+1;
+
+        if(target == input[mid]){
+            cout << "target index: " << mid << endl;
+            break;
+        }
+        else if(target == input[mid-1]){
+            cout << "target index: " << mid-1 << endl;
+            break;
+        }
+        else if(target == input[mid+1]){
+            cout << "target index: " << mid+1 << endl;
+            break;
+        }
+
+        else if(target < input[mid])
+            start = mid+2;
+
+        else if(target > input[mid])
+            end = mid-2;
+    }
+}
+
+void floorofelement(vector<int> input, int target){
+    // store element in temp every time you move right
+    int start=0; int mid=0; int end=input.size()-1;
+    int temp=0;
+
+    while(start<=end){
+        mid = start + (end-start)/2;
+        if(target < input[mid])
+            end = mid-1;
+
+        else if(target > input[mid]){
+            start = mid+1;
+            temp = input[mid];
+        }
+
+        else if(target == input[mid]){
+            temp = input[mid];
+            break;
+        }
+    }
+    cout << "floor of target " << target << " is: " << temp << endl;
+}
+
+void nextgreatestletter(vector<char> input, char target){
+    // store input[mid] into temp when going left
+    int start=0; int mid=0; int end=input.size()-1;
+    char temp;
+
+    while(start<=end){
+        mid = start+(end-start)/2;
+        if(target < input[mid]){
+            end=mid-1;
+            temp = input[mid];
+        }
+
+        else if(target > input[mid]){
+            start=mid+1;
+        }
+
+        else if(target == input[mid])
+            start=mid+1;
+        
+        if((end<=0) | (start>=input.size())){
+            temp=input[0];
+            break;
+        }
+    }
+    cout << "ceiling of target " << target << " is: " << temp << endl;
+}
+
 int main(){
     vector<int> input1 = {-1,0,3,5,9,12};
     int t1 = 12;
@@ -164,12 +245,21 @@ int main(){
     vector<int> input4{2,4,10,10,10,18,20};
     int t4 = 10;
     vector<int> input5{11,12,15,18,2,5,6,8};
+    vector<int> input6{10,3,40,20,50,80,70};
+    int t6 = 40;
+    vector<int> input7{1,2,3,4,8,10,10,12,19};
+    int t7=18;
+    vector<char> input8{'a','b','c','f','h','j','l','m'};
+    char t8='g';
 
     // int x = simplebinarysearch(input1, t1);      // 1
     // int y = reversebinarysearch(input2, t2);     // 2
     // agnosticbinarysearch(input3, t3);            // 4
     // firstlastpositions(input4, t4);              // 5
-    rotatedarrayminelem(input5);              //7
+    // rotatedarrayminelem(input5);                 // 7
+    // nearlysortedarray(input6, t6);               // 9
+    // floorofelement(input7,t7);                   // 10
+    // nextgreatestletter(input8, t8);              // 12
 
     return 0;
 }
