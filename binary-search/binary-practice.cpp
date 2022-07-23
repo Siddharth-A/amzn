@@ -9,10 +9,10 @@
 // 13 https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
 // 14 https://www.geeksforgeeks.org/find-index-first-1-sorted-array-0s-1s/
 // 15 minimum difference element in sorted array: Given a sorted array, find the element in the array which has minimum difference with the given number
-// 16
-// 17
-// 18
-// 19
+// 17 https://leetcode.com/problems/find-peak-element/
+// 18 https://leetcode.com/problems/peak-index-in-a-mountain-array/
+// 19 https://leetcode.com/problems/find-in-mountain-array/
+// 20 https://leetcode.com/problems/search-a-2d-matrix/
 
 /*!
 * \brief -  if input is sorted in ascending/descening manner, then binary search is always warranted
@@ -336,6 +336,63 @@ void closestelement(vector<int> input, int target){
     }
 }
 
+int peakinmountainarray(vector<int> input){
+    // find max element in mountain array
+    // condition for peak = input[r-1] < peak && input[r+1] < peak
+    // move left - when input[next] > input[mid]
+    // move right - when input[prev] > input[mid]
+    // condition met - done
+
+    int start=0; int mid=0; int end=input.size()-1;
+    int prev; int next; int result;
+        
+    while(start<=end){
+        mid=start+(end-start)/2;
+        prev=mid-1;
+        next=mid+1; 
+        if(mid==0)
+            prev=mid;
+        else if(mid==input.size()-1)
+            next=mid;
+        if(input[mid]>input[prev] && input[mid]>input[next]){
+            result=mid;
+            break;
+        }
+        else if(input[mid] < input[prev]){                    
+            end=mid-1;
+        }
+        else if(input[mid] < input[next]){
+            start=mid+1;
+        }
+    }
+    return result; 
+}
+
+bool matrixbinarysearch(vector<vector<int>>input, int target){
+    //same as searching in linear matrix
+    int start=0; int mid=0; int end=input[0].size()-1;
+    bool result = false;
+    
+    for(int i=0; i<input.size(); i++){
+        start=0; mid=0; end=input[0].size()-1;
+        
+        while(start<=end){
+            mid=start+(end-start)/2;
+            
+            if(target==input[i][mid]){
+                result=true;
+                break;
+            }
+            else if(target<input[i][mid])
+                end=mid-1;
+            
+            else if(target>input[i][mid])
+                start=mid+1;
+        }
+    }
+    return result;
+}
+
 int main(){
     vector<int> input1 = {-1,0,3,5,9,12};
     int t1 = 12;
@@ -353,6 +410,14 @@ int main(){
     vector<char> input8{'a','b','c','f','h','j','l','m'};
     char t8='g';
     vector<int> input9{0,0,0,0,0,0,1,1,1,1};
+    vector<int> input10{0,3,7,9,10,5,4,2,1};
+
+    vector<vector<int>> matrix
+    {
+        {1,3,5,7},
+        {10,11,16,20},
+        {23,30,34,60}
+    };
 
     // int x = simplebinarysearch(input1, t1);      // 1
     // int y = reversebinarysearch(input2, t2);     // 2
@@ -365,7 +430,10 @@ int main(){
     // findininfinitearray(input6,t6);              // 13 (TODO: does not work)
     // searchbinaryarray(input9);                   // 14
     // closestelement(input7,t7);                   // 15
-    
+    // peakinmountainarray(input10);                // 18
+    // bool m = matrixbinarysearch(matrix, 3);      // 20
+    // cout << m << endl;
+
 
     return 0;
 }
