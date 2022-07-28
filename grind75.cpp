@@ -1,8 +1,8 @@
 /* JULY 27 - AUG 3
 q1: two-sum:                            https://leetcode.com/problems/two-sum/solution/
 q2: best time to buy and sell stock:    https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/
-q3: 
-q4: 
+q3: insert interval:                    https://leetcode.com/problems/insert-interval/
+q4: three-sum:                          https://leetcode.com/problems/3sum/
 q5: 
 q6: 
 q7: 
@@ -59,10 +59,56 @@ void bestime(){
     cout << "max profit: " << maxprofit << endl;
 }
 
+void insertinterval(){
+    vector<vector<int>> input { {1,2}, {3,5}, {6,7}, {8,10}, {12,16} };
+    vector<int> newinterval {4,8};
+
+    int s1, e1, s2, e2;
+    vector<vector<int>> sol;
+
+    s2 = newinterval[0];
+    e2 = newinterval[1];
+
+    if(input.size()==0){
+        sol.push_back({newinterval[0], newinterval[1]});
+        return;
+    }
+    
+    for(int i=0; i<input.size();i++){
+        s1 = input[i][0];
+        e1 = input[i][1];
+
+        // get start2,end2 from sol
+        if(sol.size()>0){
+            vector<int> temp = sol.back();
+            s2 = temp[0];
+            e2 = temp[1];
+            sol.pop_back();
+        }
+
+        // if newint overlaps
+        if(e2 >= s1 & s2 <= e1)
+            sol.push_back({min(s1,s2), max(e1,e2)});
+        
+
+        // if newint does not overlap
+        else if(s2 > s1){
+            sol.push_back(input[i]);
+            sol.push_back({s2,e2});
+        }
+        else{
+            sol.push_back({s2,e2});
+            sol.push_back(input[i]);
+        }
+    }
+}
+
 int main(){
 
     // twosum();
-    bestime();
+    // bestime();
+    // insertinterval();
+    threesum();
     return 0;
 }
 
