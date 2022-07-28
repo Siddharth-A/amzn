@@ -1,4 +1,4 @@
-// print 1 to n numbers
+// 1 print 1 to n numbers / print n to 1 numbers
 
 /*!
 * \brief -  
@@ -25,19 +25,45 @@
 
 using namespace std;
 
-void print1ton(int input){
-    if(input == 1)                  //base condition
+void printnto1(int input){
+    if(input == 1){                  //base condition
         cout << input << endl;
-
-    else if(input > 1){
-        cout << input << " ";       //induction
-        print1ton(input-1);         //hypothesis
+        return;
     }
 
+    cout << input << " ";       //induction:  printing n from hypothesis
+    printnto1(input-1);         //hypothesis: assuming printnto1(n-1) will print (n-1)...1 just print n
+
+
+}
+
+void print1ton(int input){
+
+    if(input == 1){
+        cout << input << " ";
+        return;
+    }
+
+    print1ton(input-1);
+    cout << input << " ";
+}
+
+int factorial(int input){
+    // base condition
+    if(input == 1)
+        return input;
+    
+    //induction: multiply input after call to function
+    //hypothesis: assume fact(n-1) will give (n-1) factorial. just multiply n
+    int sol = input * factorial(input-1);
+    return sol;
 }
 
 int main(){
     int n = 10;
-    print1ton(10);
+    // printnto1(10);
+    // print1ton(10);
+    // cout << "factorial: " << factorial(4) << endl;
+
     return 0;
 }
