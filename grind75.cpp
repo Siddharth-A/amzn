@@ -12,6 +12,7 @@ q8:
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -30,8 +31,8 @@ void twosum(){
             sol.push_back(i);
             sol.push_back(umap[target-x]);
         }
-        else
-            umap.insert({x,i});
+
+        umap.insert({input[i],i});
     }
 
     for(auto y:sol)
@@ -101,6 +102,55 @@ void insertinterval(){
             sol.push_back(input[i]);
         }
     }
+}
+
+void threesum(){
+    //would consider this cheating
+    //using set instead to limit the output to only unique cases rather than algorithm
+    vector<int> input{-1,0,1,2,-1,-4};
+    vector<vector<int>> sol;
+    set<vector<int>> solset;
+
+    for(int i=0;i<input.size();i++){
+        
+        if(int i=0 || input[i] != input[i-1]){
+            int j=i+1;
+            int k=input.size()-1;
+            
+            while(j<k){
+                
+                int target = input[i]+input[j]+input[k];
+
+                if(target==0){
+                    solset.insert({input[i],input[j],input[k]});
+                    j++;
+                    k--;
+                    if(input[j]==input[j-1])
+                        j++;
+                    if(input[k]==input[k+1])
+                        k--;
+                }
+
+                else if(target>0)
+                    k--;
+                
+                else
+                    j++;            
+            }
+
+        }
+    }
+    for (auto it = solset.begin();it != solset.end();it++) {
+        sol.push_back(*it);
+    }
+
+    cout << sol.size() << endl;
+
+    for(int l=0;l<sol.size();l++){
+        for(auto x:sol[l])
+            cout << x << " ";
+    }
+
 }
 
 int main(){
