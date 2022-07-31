@@ -1,4 +1,7 @@
 // 1 print 1 to n numbers / print n to 1 numbers
+// 5 https://leetcode.com/problems/maximum-depth-of-binary-tree/
+// 7 sort stack using recursion
+// 9 reverse stack in only using 1 stack
 
 /*!
 * \brief -  
@@ -22,8 +25,23 @@
 
 
 #include <iostream>
+#include <vector>
+#include <stack>
 
 using namespace std;
+
+class Node{
+    public:
+        int data;
+        Node *left;
+        Node *right;
+
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
 
 void printnto1(int input){
     if(input == 1){                  //base condition
@@ -59,11 +77,102 @@ int factorial(int input){
     return sol;
 }
 
+int heightofbinarytree(Node *input){
+
+    //base condition
+    if(input == NULL)
+        return 0;
+    
+    // hypothesis
+    int lh = heightofbinarytree(input->left);
+    cout << "left: " << lh << endl;
+    int rh = heightofbinarytree(input->right);
+    cout << "right: " << rh << endl;
+
+
+    return (1+max(lh,rh));
+}
+
+void insert(stack<int> &s, int temp){
+    // base condition
+    if(s.size()==0 || temp >= s.top()){
+        s.push(temp);
+        return;
+    }
+    int x = s.top();        //induction
+    s.pop();
+    insert(s,temp);        //hypothesis
+    s.push(x);
+}
+
+void sortstack(stack<int> &s){
+    // base condition
+    if(s.size() == 1){
+        return;
+    }
+    // induction
+    int temp = s.top();
+    s.pop();
+    // hypothesis
+    sortstack(s);
+    insert(s, temp);
+}
+
+void deletemiddle(stack<int> &s){
+    cout << "delete" << endl;
+}
+
 int main(){
     int n = 10;
-    // printnto1(10);
-    // print1ton(10);
-    // cout << "factorial: " << factorial(4) << endl;
+    // printnto1(10);                                       //basics
+    // print1ton(10);                                       //basics
+    // cout << "factorial: " << factorial(4) << endl;       //basics
+
+
+    //height of tree
+    /***************************************************
+    Node *root = new Node(60);
+    root->left = new Node(50);
+    root->right = new Node(70);
+
+    root->left->left = new Node(45);
+    root->left->right = new Node(55);
+
+    root->left->left->left = new Node(43);
+    root->left->left->right = new Node(47);
+
+    root->left->left->right->right = new Node(49);
+    int h = heightofbinarytree(root);
+    cout << "height of binary tree: " << h << endl;
+    **************************************************/
+
+   //sort a stack
+   /***************************************************
+   stack<int> s;
+    s.push(43);
+    s.push(3);
+    s.push(54);
+    s.push(34);
+    s.push(2);
+
+    sortstack(s);
+    while(s.size()){
+        cout << s.top() << " ";
+        s.pop();
+    }
+    **************************************************/
+
+   //delete middle element of stack
+    stack<int> s;
+    s.push(43);
+    s.push(3);
+    s.push(54);
+    s.push(34);
+    s.push(2);
+    s.push(6);
+
+
+
 
     return 0;
 }
