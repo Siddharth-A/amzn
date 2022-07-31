@@ -3,7 +3,7 @@ q1: two-sum:                            https://leetcode.com/problems/two-sum/so
 q2: best time to buy and sell stock:    https://leetcode.com/problems/best-time-to-buy-and-sell-stock/submissions/
 q3: insert interval:                    https://leetcode.com/problems/insert-interval/
 q4: three-sum:                          https://leetcode.com/problems/3sum/
-q5: 
+q5: prodcut of array except self        https://leetcode.com/problems/product-of-array-except-self/
 q6: 
 q7: 
 q8: 
@@ -153,12 +153,33 @@ void threesum(){
 
 }
 
+void productexceptself(){
+    vector<int> input{1,2,3,4};
+    vector<int> left;
+    vector<int> right;
+    vector<int> sol;
+
+    left.push_back(1);
+    right.push_back(1);
+
+    for(int i=1;i<input.size();i++){
+        left.push_back(left[i-1]*input[i-1]);
+        right.push_back(right[i-1]*input[input.size()-i]);
+    }
+
+    for(int i=0; i<input.size();i++){
+        sol.push_back(left[i]*right[input.size()-1-i]);
+        cout << sol[i] << " ";
+    }
+}
+
 int main(){
 
     // twosum();
     // bestime();
     // insertinterval();
-    threesum();
+    // threesum();
+    productexceptself();
     return 0;
 }
 
