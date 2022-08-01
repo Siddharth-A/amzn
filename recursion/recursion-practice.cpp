@@ -1,7 +1,8 @@
-// 1 print 1 to n numbers / print n to 1 numbers
-// 5 https://leetcode.com/problems/maximum-depth-of-binary-tree/
-// 7 sort stack using recursion
-// 10 https://leetcode.com/problems/k-th-symbol-in-grammar/
+// 1    print 1 to n numbers / print n to 1 numbers
+// 5    https://leetcode.com/problems/maximum-depth-of-binary-tree/
+// 7    sort stack using recursion
+// 10   https://leetcode.com/problems/k-th-symbol-in-grammar/
+// 12   print all substrings of a string
 
 
 
@@ -141,11 +142,31 @@ row4: 0 1 1 0 1 0 0 1
     else
         return !(symbolgrammer(n-1,k-mid));
 
-    //induction
-
-    
+    //induction    
 }
 
+void printsubset(vector<char> input, vector<char> output){
+    if(input.size()==0){
+        for(auto x:output)
+            cout << x << ' ';
+        cout << endl;
+        return;
+    }
+
+    vector<char> op1;
+    vector<char> op2;
+
+    op1 = output;
+    op2 = output;
+    op2.push_back(input[0]);
+    input.erase(input.begin()+0);
+
+    printsubset(input,op1);
+    printsubset(input,op2);
+
+    
+
+}
 
 int main(){
     // int n = 10;
@@ -188,9 +209,19 @@ int main(){
     **************************************************/
 
    //kth symbol grammer
+   /***************************************************
    int n=4;
    int k=3;
     cout << symbolgrammer(n,k) << endl;
+    **************************************************/
+
+   //print subset
+   /***************************************************
+   vector<char> input={'a','b','c'};
+   vector<char> output;
+   printsubset(input,output);
+    **************************************************/
+
 
 
 
