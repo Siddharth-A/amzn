@@ -1,7 +1,10 @@
 // 1 print 1 to n numbers / print n to 1 numbers
 // 5 https://leetcode.com/problems/maximum-depth-of-binary-tree/
 // 7 sort stack using recursion
-// 9 reverse stack in only using 1 stack
+// 10 https://leetcode.com/problems/k-th-symbol-in-grammar/
+
+
+
 
 /*!
 * \brief -  
@@ -27,6 +30,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <cmath>
 
 using namespace std;
 
@@ -118,12 +122,33 @@ void sortstack(stack<int> &s){
     insert(s, temp);
 }
 
-void deletemiddle(stack<int> &s){
-    cout << "delete" << endl;
+int symbolgrammer(int n, int k){
+/*
+row1: 0
+row2: 0 1
+row3: 0 1 1 0
+row4: 0 1 1 0 1 0 0 1  
+*/
+
+    //base condition
+    if(n==1 & k==1)
+        return 0;
+
+    int mid=pow(2,n-1)/2;
+    //hypothesis
+    if(k<=mid)
+        return (symbolgrammer(n-1,k));
+    else
+        return !(symbolgrammer(n-1,k-mid));
+
+    //induction
+
+    
 }
 
+
 int main(){
-    int n = 10;
+    // int n = 10;
     // printnto1(10);                                       //basics
     // print1ton(10);                                       //basics
     // cout << "factorial: " << factorial(4) << endl;       //basics
@@ -162,15 +187,10 @@ int main(){
     }
     **************************************************/
 
-   //delete middle element of stack
-    stack<int> s;
-    s.push(43);
-    s.push(3);
-    s.push(54);
-    s.push(34);
-    s.push(2);
-    s.push(6);
-
+   //kth symbol grammer
+   int n=4;
+   int k=3;
+    cout << symbolgrammer(n,k) << endl;
 
 
 
