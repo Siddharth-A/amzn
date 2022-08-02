@@ -4,7 +4,7 @@ q2: best time to buy and sell stock:    https://leetcode.com/problems/best-time-
 q3: insert interval:                    https://leetcode.com/problems/insert-interval/
 q4: three-sum:                          https://leetcode.com/problems/3sum/
 q5: prodcut of array except self        https://leetcode.com/problems/product-of-array-except-self/
-q6: 
+q6: combination sum                     https://leetcode.com/problems/combination-sum/solution/
 q7: 
 q8: 
 
@@ -13,6 +13,7 @@ q8:
 #include <unordered_map>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 using namespace std;
 
@@ -173,13 +174,42 @@ void productexceptself(){
     }
 }
 
+void combinationsumhelp(vector<int> &input, int target, vector<vector<int>> &sol, vector<int> &comb, int start){
+    if(!target){
+        sol.push_back(comb);
+        return;
+    }
+    for(int i=start; i<input.size() & target >= input[i];i++){
+        comb.push_back(input[i]);
+        combinationsumhelp(input, target-input[i], sol, comb, i);
+        comb.pop_back();
+    }
+}
+
+void combinationsum(){
+    vector<int> input{2,3,6,7};
+    int target=7;
+
+    sort(input.begin(),input.end());
+    vector<vector<int>> sol;
+    vector<int> comb;
+    combinationsumhelp(input, target, sol, comb, 0);
+
+    for(int i=0;i<sol.size();i++){
+        for(auto x:sol[i])
+            cout << x << " ";
+        cout << endl;
+    }
+}
+
 int main(){
 
     // twosum();
     // bestime();
     // insertinterval();
     // threesum();
-    productexceptself();
+    // productexceptself();
+    combinationsum();
     return 0;
 }
 
