@@ -3,7 +3,7 @@
 // 7    sort stack using recursion
 // 10   https://leetcode.com/problems/k-th-symbol-in-grammar/
 // 12   print all substrings of a string
-
+// 14   permutation with spaces
 
 
 
@@ -168,6 +168,25 @@ void printsubset(vector<char> input, vector<char> output){
 
 }
 
+void permutationwithspace(vector<char> input, vector<char> output){
+    // base condition
+    if(input.size()==0){
+        if(output.back() != '_'){
+            for(auto x:output)
+                cout << x << "";
+            cout << endl;
+        }
+        return;
+    }
+    
+    output.push_back(input[0]);
+    input.erase(input.begin()+0);
+
+    permutationwithspace(input,output);
+    output.push_back('_');
+    permutationwithspace(input,output);
+}
+
 int main(){
     // int n = 10;
     // printnto1(10);                                       //basics
@@ -221,6 +240,11 @@ int main(){
    vector<char> output;
    printsubset(input,output);
     **************************************************/
+
+   //permutation with spaces
+   vector<char> input={'a','b','c'};
+   vector<char> output;
+   permutationwithspace(input, output);
 
 
 
