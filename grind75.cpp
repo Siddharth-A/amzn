@@ -202,6 +202,10 @@ void combinationsum(){
     }
 }
 
+void simplebinarysearch(){
+    
+}
+
 int main(){
 
     // twosum();
@@ -209,7 +213,8 @@ int main(){
     // insertinterval();
     // threesum();
     // productexceptself();
-    combinationsum();
+    // combinationsum();
+    //simplebinarysearch();
     return 0;
 }
 
