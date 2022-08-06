@@ -5,6 +5,7 @@
 // 12   print all substrings of a string
 // 14   permutation with spaces
 // 15   permutation with case change
+// 16   https://leetcode.com/problems/letter-case-permutation/
 
 
 
@@ -206,6 +207,43 @@ void permutationwithcase(vector<char> input, vector<char> output){
     permutationwithcase(input, op2);
 }
 
+void letterhelper(string input, string output, vector<string> &sol){
+    //base condition
+    if(input.size()==0){
+        // cout << output << endl;
+        sol.push_back(output);
+        return;
+    }
+
+    if(isalpha(input[0])){
+        string op1 = output;
+        string op2 = output;
+        op1.push_back((char)tolower(input[0]));
+        op2.push_back((char)toupper(input[0]));
+        input.erase(input.begin()+0);
+        letterhelper(input, op1, sol);
+        letterhelper(input,op2, sol);
+    }
+    else{
+        output.push_back(input[0]);
+        input.erase(input.begin()+0);
+        letterhelper(input, output, sol);
+    }
+
+
+}
+
+void lettcasepermutation(string input){
+    string output;
+    vector<string> sol;
+    letterhelper(input,output, sol);
+
+    for(auto x:sol)
+        cout << x << " ";
+    cout << endl;
+
+}
+
 int main(){
     // int n = 10;
     // printnto1(10);                                       //basics
@@ -253,25 +291,32 @@ int main(){
     cout << symbolgrammer(n,k) << endl;
     **************************************************/
 
-   //print subset
+   //print subset [a,b,c] => [abc, a, b, c, ab, bc, ac, " "]
    /***************************************************
    vector<char> input={'a','b','c'};
    vector<char> output;
    printsubset(input,output);
     **************************************************/
 
-   //permutation with spaces
+   //permutation with spaces [a,b,c] => [abc, a_bc, ab_c, a_b_c]
    /***************************************************
    vector<char> input={'a','b','c'};
    vector<char> output;
    permutationwithspace(input, output);
    **************************************************/
 
-  //permutation with case change
+  //permutation with case change [a,b] => [ab, Ab, aB, AB]
+   /***************************************************
   vector<char> input={'a','b'};
   vector<char> output;
   permutationwithcase(input,output);
+   **************************************************/
 
+  //letter case permuation
+  /***************************************************
+  string input = "a1B2";
+  lettcasepermutation(input);
+   **************************************************/
 
     return 0;
 }
