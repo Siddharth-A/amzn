@@ -4,6 +4,7 @@
 // 10   https://leetcode.com/problems/k-th-symbol-in-grammar/
 // 12   print all substrings of a string
 // 14   permutation with spaces
+// 15   permutation with case change
 
 
 
@@ -187,6 +188,24 @@ void permutationwithspace(vector<char> input, vector<char> output){
     permutationwithspace(input,output);
 }
 
+void permutationwithcase(vector<char> input, vector<char> output){
+    //base condition
+    if(input.size()==0){
+        for(auto x:output)
+            cout << x << "";
+        cout << endl;
+        return;
+    }
+
+    vector<char> op1 = output;
+    vector<char> op2 = output;
+    op1.push_back(input[0]);
+    op2.push_back((char)toupper(input[0]));
+    input.erase(input.begin()+0);
+    permutationwithcase(input, op1);
+    permutationwithcase(input, op2);
+}
+
 int main(){
     // int n = 10;
     // printnto1(10);                                       //basics
@@ -242,11 +261,16 @@ int main(){
     **************************************************/
 
    //permutation with spaces
+   /***************************************************
    vector<char> input={'a','b','c'};
    vector<char> output;
    permutationwithspace(input, output);
+   **************************************************/
 
-
+  //permutation with case change
+  vector<char> input={'a','b'};
+  vector<char> output;
+  permutationwithcase(input,output);
 
 
     return 0;
