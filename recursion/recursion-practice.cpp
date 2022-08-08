@@ -6,6 +6,7 @@
 // 14   permutation with spaces
 // 15   permutation with case change
 // 16   https://leetcode.com/problems/letter-case-permutation/
+// 17   https://leetcode.com/problems/generate-parentheses/
 
 
 
@@ -244,6 +245,46 @@ void lettcasepermutation(string input){
 
 }
 
+void generatehelper(int open, int close, string output, vector<string> &sol){
+
+    // base condition
+    if (close==0 & open==0){
+        sol.push_back(output);
+        return;
+    }
+
+    if(open>0){
+        string op1 = output;
+        op1.push_back('(');
+        // output.push_back(')');
+        // open=open-1;
+        generatehelper(open-1, close, op1, sol);
+    }
+
+    if(close > open){
+        string op2 = output;
+        op2.push_back(')');
+        // output.push_back('(');
+        // close=close-1;
+        generatehelper(open, close-1, op2, sol);
+    }
+    return;
+}
+
+void generateparanthesis(int input){
+    int close = input;
+    int open = input;
+    vector<string> sol;
+
+    generatehelper(open, close, "", sol);
+
+    for(int i=0; i<sol.size(); i++){
+        for(auto x:sol[i])
+            cout << x << "";
+        cout << endl;
+    }
+}
+
 int main(){
     // int n = 10;
     // printnto1(10);                                       //basics
@@ -317,6 +358,9 @@ int main(){
   string input = "a1B2";
   lettcasepermutation(input);
    **************************************************/
+
+  //generate balanced paranthesis
+  generateparanthesis(3);
 
     return 0;
 }
