@@ -1,7 +1,7 @@
 /**
  *(I)  0-1 knapsack problem
- *      1 subset problem
- *      2 equal sum partition
+ *      1 subset problem:           https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
+ *      2 equal sum partition       https://leetcode.com/problems/partition-equal-subset-sum/
  *      3 count of subset sum
  *      4 minimum subset sum diff
  *      5 target sum
@@ -63,11 +63,63 @@ int basicknapsacktopdown(vector<int> wt, vector<int> pr, int maxw, int nn){
     return result;
 }
 
+bool subsetsum(int input[], int sum, int n){
+    // n is i, sum is j
+    bool dp[n+1][sum+1];
+    memset(dp,-1,sizeof(dp));
+
+    bool sol=0;
+    for(int i=0; i<n+1; i++){
+        for(int j=0; j<sum+1; j++){
+            if(i==0)
+                dp[i][j]=0;
+            if(j==0)
+                dp[i][j]=1;
+        }
+    }
+
+    for(int i=1; i<n+1; i++){
+        for(int j=1; j<sum+1; j++){
+            if(input[i-1]<=j)
+                dp[i][j] = (dp[i-1][j-input[i-1]] || dp[i-1][j]);
+
+            else
+                dp[i][j] = dp[i-1][j];
+        }
+    }
+
+    for(int i=0; i<n+1;i++){
+        for(int j=0; j<sum+1;j++)
+            cout << dp[i][j] << " ";
+        cout << endl;
+    }
+        return dp[n][sum];
+
+    // recursive solution
+    // // int sol=-1;
+    // //base condition
+    // if(n==0 | sum==0){
+    //     if(n==0)
+    //         cout << "valid sum not found" << endl;
+    //     else
+    //         cout << "valid sum found" << endl;
+    //     return 0;
+    // }
+    
+    // if(input[n-1] <= sum){
+    //     return max(input[n-1] + subsetsum(input, sum-input[n-1],n-1), subsetsum(input, sum,n-1));
+    // }
+
+    // else
+    //     return subsetsum(input, sum,n-1);
+
+}
+
 int main(){
 
-// CONCEPT I:0-1 basic knapsack
+// CONCEPT I: 0-1 basic knapsack
 //*********************************************************************************************************************//
-    // 0-1 basic knapsack 
+    /* 0-1 basic knapsack 
     memset(dp,-1,sizeof(dp));
 
     vector<int> wt{1,3,4,5};
@@ -79,14 +131,28 @@ int main(){
     int maxp = basicknapsackmemoize(wt,pr,maxw,n);
     int maxp2 = basicknapsacktopdown(wt,pr,maxw,n);
     cout << "max price that can be driven for wt:" << maxw << " is = " << maxp2 << endl;
-//*********************************************************************************************************************//
+    */
 
-/* Q1.1:
-subset problem: given key value pair, find the combination of keys which will give max profit
-item wt[] w1 w2 w3 w4
-item pr[] p1 p2 p3 p4
-max capacity=> w 
-*/
+    /* Q1.1 subset problem: Given a set of int and a sum, determine if there is a subset of the given set with sum equal to given sum
+   int input[] = {2,3,7,8,10};
+   int sum=12;
+   int n = sizeof(input)/sizeof(input[0]);
+   bool sol = subsetsum(input,sum,n);
+
+   cout << "sol: " << sol << endl;
+   */
+   
+
+    /* Q1.2 equal sum partition: Given an arr, find if array can be partitioned into 2 subsets s.t sum of elements in both subsets is equal
+   */
+//   memset(bpd, false, sizeof(bpd));
+//   vector<int> input{1,5,11,5};
+//   n = input.size();
+
+//   equalsumpartition(input, n);
+
+
+//*********************************************************************************************************************//
 
 
     return 0;
