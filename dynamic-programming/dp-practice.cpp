@@ -115,6 +115,45 @@ bool subsetsum(int input[], int sum, int n){
 
 }
 
+bool equalsumpartition(vector<int> &input){
+    int n = input.size();
+    int sum=0;
+    for(auto x:input)
+        sum = sum+x;
+    
+    if(sum%2 == 0){
+        int sumhalf=sum/2;
+        bool dp[n+1][sumhalf+1];
+        memset(dp,false,sizeof(dp));
+
+        for(int i=0; i<n+1; i++){
+            for(int j=0; j<sumhalf+1; j++){
+                if(i==0)
+                    dp[i][j] = false;
+                if(j==0)
+                    dp[i][j] = true;
+            }
+        }
+
+        for(int i=1; i<n+1; i++){
+            for(int j=1; j<sumhalf+1; j++){
+                int curr = input[i-1];
+                
+                if(curr <= j)
+                    dp[i][j] = dp[i-1][j-curr] | dp[i-1][j];
+
+                else
+
+                    dp[i][j] = dp[i-1][j];
+
+            }
+        }
+        return dp[n][sumhalf];
+    }
+    else
+        return false;
+}
+
 int main(){
 
 // CONCEPT I: 0-1 basic knapsack
@@ -138,18 +177,15 @@ int main(){
    int sum=12;
    int n = sizeof(input)/sizeof(input[0]);
    bool sol = subsetsum(input,sum,n);
-
    cout << "sol: " << sol << endl;
    */
    
 
     /* Q1.2 equal sum partition: Given an arr, find if array can be partitioned into 2 subsets s.t sum of elements in both subsets is equal
    */
-//   memset(bpd, false, sizeof(bpd));
-//   vector<int> input{1,5,11,5};
-//   n = input.size();
-
-//   equalsumpartition(input, n);
+    vector<int> input{1,5,11,5};
+    int sol = equalsumpartition(input);
+    cout << "sol: " << sol << endl;
 
 
 //*********************************************************************************************************************//
