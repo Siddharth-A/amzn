@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 
 using namespace std;
+
+
+//BASICS##############################################################################################
 
 /* INLINE FUNCTIONS: compiler places a copy of the function at every point in the code.
 no control transfer takes place to function body. no overhead time. used for small func*/
@@ -275,8 +279,51 @@ void exception_func(){
     }  
 }
 
+//HEAP##############################################################################################
+/*HEAP ALGORITHM USAGE
+HEAP: is a special Tree-based data structure in which the tree is a complete binary tree
+COMPLETE BINARY TREE: is a special type of binary tree where all the levels of the tree are 
+filled completely except the lowest level nodes which are filled from as left as possible
+
+PRIORITY QUEUE: is a C++ STL container built to replicate heap and use an array or vector 
+as an internal structure
+
+TIME COMPLEXITY:
+- push, pop: O(log n)
+- empty, size, top: O(1)
+
+USE-CASE:
+heap data structure should be used when K is given along with "min" "max" keywords
+for e.x.: find the kth largest element in the array
+*/
+void kthlargestelement(){
+    vector <int> input1 = {7,10,4,3,20,15};
+    int k=3;
+    priority_queue<int, vector<int>, greater<int>> minheap; //min-heap
+    
+    for(auto i:input1){
+        minheap.push(i);
+        if(minheap.size()>k)
+            minheap.pop();
+    }
+    cout << k << "th largest element: " << minheap.top() << endl;
+}
+
+void kthsmallestelement(){
+    vector<int> input2 = {7,10,4,3,20,15};
+    int k=2;
+    priority_queue<int> maxheap;
+    for(auto i:input2){
+        maxheap.push(i);
+        if(maxheap.size()>k)
+            maxheap.pop();
+    }
+    cout << k << "th smallest element: " << maxheap.top() << endl;
+}
+
 int main()
 {
+    // BASICS
     // cout << add(2,3) << endl;
     // switch_func();
     // dowhile_func();
@@ -287,5 +334,11 @@ int main()
     // class_func();
     // template_func(5,5);
     // exception_func();
+
+    // HEAP
+//    kthlargestelement();
+//    kthsmallestelement();
+
+
     return 0;
 }
