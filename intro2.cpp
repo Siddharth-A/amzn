@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <unordered_map>
 
 using namespace std;
 
@@ -321,6 +322,67 @@ void kthsmallestelement(){
     cout << k << "th smallest element: " << maxheap.top() << endl;
 }
 
+void knearlysortedarray(){
+    vector<int> input3 = {6,5,3,2,8,10,9};
+    int k=3;
+    vector<int> sol;
+    priority_queue<int, vector<int>, greater<int>> minheap;
+    for(auto i:input3){
+        minheap.push(i);
+        if(minheap.size()>k){
+            sol.push_back(minheap.top());
+            minheap.pop();
+        }
+    }
+    while(minheap.size()){
+        sol.push_back(minheap.top());
+        minheap.pop();
+    }
+    for (auto j:sol)
+        cout << j << " ";
+    cout << endl;
+}
+
+void kclosestnum(){
+    vector<int> input4 = {1,6,3,9,12,7,13};
+    int k=3, x=12;
+    priority_queue<pair<int,int>> maxheap;
+    for(auto i:input4){
+        maxheap.push(make_pair(abs(x-i), i));
+        if(maxheap.size()>k)
+            maxheap.pop();
+    }
+    cout << k << " closest values to " << x << " : " << endl;
+    while(maxheap.size()>0){
+        cout << maxheap.top().second << endl;
+        maxheap.pop();
+    }
+}
+
+void kmostfrequent(){
+#ifndef pp
+#define pp pair<int,int>
+    vector<int> input5 = {1,1,1,1,3,2,2,4,6,6,6};
+    int k=2;
+    unordered_map<int, int> mp;
+    priority_queue<pp, vector<pp>, greater<pp>> minheap;
+
+    for(auto x:input5){
+        mp[x]++;
+    }
+    for(auto y:mp){
+        minheap.push(make_pair(y.second, y.first));
+        if(minheap.size()>k)
+            minheap.pop();
+    }
+    cout << k << " most frequent elements: " << endl;
+    while(minheap.size()>0){
+        cout << "element: " << minheap.top().second << ", frequency: " << minheap.top().first << endl;
+        minheap.pop();
+    }
+#endif
+}
+
 int main()
 {
     // BASICS
@@ -336,8 +398,11 @@ int main()
     // exception_func();
 
     // HEAP
-//    kthlargestelement();
-//    kthsmallestelement();
+    // kthlargestelement();
+    // kthsmallestelement();
+    // knearlysortedarray();
+    // kclosestnum();
+    kmostfrequent();
 
 
     return 0;
