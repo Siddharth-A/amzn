@@ -3,6 +3,12 @@
 #include <vector>
 #include <queue>
 #include <unordered_map>
+#include <stack>
+#include <algorithm>
+#include <ctime>
+#include <thread>
+#include <unistd.h>
+#include <mutex>
 
 using namespace std;
 
@@ -286,8 +292,13 @@ HEAP: is a special Tree-based data structure in which the tree is a complete bin
 COMPLETE BINARY TREE: is a special type of binary tree where all the levels of the tree are 
 filled completely except the lowest level nodes which are filled from as left as possible
 
+QUEUE: is a FIFO dat structure.
+
+TIME COMPLEXITY:
+- top, push, pop: O(1)
+
 PRIORITY QUEUE: is a C++ STL container built to replicate heap and use an array or vector 
-as an internal structure
+as an internal structure. 
 
 TIME COMPLEXITY:
 - push, pop: O(log n)
@@ -296,6 +307,13 @@ TIME COMPLEXITY:
 USE-CASE:
 heap data structure should be used when K is given along with "min" "max" keywords
 for e.x.: find the kth largest element in the array
+
+max-heap: max value is sorted from top to bottom. hence, when asked 3rd smallest,
+limit size of maxheap to 3 and sort throuh input. maxheap.top will be k smallest
+
+min-heap: min value is sorted from top to bottom. hence, when asked 3rd largest,
+limit size of minheap to 3 and sort throuh input. minheap.top will be k largest
+
 */
 void kthlargestelement(){
     vector <int> input1 = {7,10,4,3,20,15};
@@ -383,6 +401,120 @@ void kmostfrequent(){
 #endif
 }
 
+//STACK##############################################################################################
+/*STACK ALGORITHM USAGE
+STACK: is a LIFO data structure.
+
+TIME COMPLEXITY:
+- top, push, pop: O(1)
+
+USE-CASE:
+whenever the brute force solution seems like a double for loop, use stack
+*/
+
+void nextgreatestright(){
+    // next greatest element (to the right)
+    vector<int> input1={1,3,0,0,1,2,4};
+    vector<int> sol;
+    stack<int> s;
+
+    for(int i=input1.size()-1;i>=0;i--){
+        // stack empty
+        if(s.size()==0)
+            sol.push_back(-1);
+        // s.top > input
+        else if(s.top()>input1[i])
+            sol.push_back(s.top());
+        // s.top <= input
+        else if(s.top()<=input1[i]){
+            while(s.top()<=input1[i] && s.size()>0)
+                s.pop();
+            if(s.size()==0)
+                sol.push_back(-1);
+            else if(s.top()>input1[i])
+                sol.push_back(s.top());
+        }
+        s.push(input1[i]);
+    }
+    reverse(sol.begin(),sol.end());
+}
+
+void nextsmallestright(){
+    vector<int> input={1,3,0,0,1,2,4};
+    stack<int> s;
+    vector<int> sol;
+
+    for(int i=input.size()-1;i>=0;i--){
+        //s.size = 0
+        if(s.size()==0)
+            sol.push_back(-1);
+
+        //s.top < input
+        else if(s.top()<input[i])
+            sol.push_back(s.top());
+
+        // s.top > input
+        else if(s.top()>=input[i]){
+            while(s.size()>0 && s.top()>=input[i])
+                s.pop();
+            if(s.size()==0)
+                sol.push_back(-1);
+            else if(s.top()<input[i])
+                sol.push_back(s.top());
+        }
+        s.push(input[i]);
+    }
+    reverse(sol.begin(),sol.end());
+
+    for (auto x:sol)
+        cout << x << " ";
+}
+
+/*MULTI-THREADING###################################################################################
+CONCURRENCY/MULTI-THREADING: appearance of in-parallel execution achieved via multi-threading. e.x.: chatting
+on teams with multiple people is you goig back and forth
+
+PARALLELISM: code executing in parallel by leveraging multi-cores of the system. e.x.: singing in shower
+
+DATA RACE: when at least two threads can simultaneously access a variable or memory location
+
+*/
+mutex m1;
+
+void print1(int n){
+    cout << "print integer: " << n << endl;
+}
+
+void print2(){
+    // m1.lock();
+    for(int i=0;i<=20;i++)
+        cout << "print2:" << i << endl;
+    // m1.unlock();
+}
+
+void multithreading1(){
+    // thread t1(print1, 99);
+    // t1.join();
+    // thread t2(print1, 100);
+    // t2.join();
+
+    // vector<int> v = {23,33,43,53};
+    // vector<thread> th;
+    // for(int i=0;i<v.size();i++){
+    //     th.push_back(thread(print1, v[i]));
+    // }
+
+    // for(auto &x:th)
+    //     x.join();
+
+    thread t3(print2);
+    t3.join();
+    for(int i=0;i<=20;i++)
+        cout << "multithreading1:" << i << endl;
+
+    
+}
+
 int main()
 {
     // BASICS
@@ -402,7 +534,14 @@ int main()
     // kthsmallestelement();
     // knearlysortedarray();
     // kclosestnum();
-    kmostfrequent();
+    // kmostfrequent();
+
+    // STACK
+    // nextgreatestright();
+    // nextsmallestright();
+
+    // MULTI-THREADING
+    multithreading1();
 
 
     return 0;
