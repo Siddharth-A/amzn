@@ -477,7 +477,6 @@ on teams with multiple people is you goig back and forth
 PARALLELISM: code executing in parallel by leveraging multi-cores of the system. e.x.: singing in shower
 
 DATA RACE: when at least two threads can simultaneously access a variable or memory location
-
 */
 mutex m1;
 
@@ -511,8 +510,88 @@ void multithreading1(){
     t3.join();
     for(int i=0;i<=20;i++)
         cout << "multithreading1:" << i << endl;
+}
 
+//LINKED-LISTS#######################################################################################
+/*
+LINKED-LIST: A linked list is a linear data structure, in which the elements are not stored at contiguous 
+memory locations.
+
+TIME COMPLEXITY:
+- insertion/deletion: O(n)
+
+USE-CASE:
+- dynamic mem allocation: memory efficient
+- ease of insertion/deletion
+- random access of node not allowed. need to travese LL
+- 
+*/
+class node{
+public:
+    int data;
+    node* next;
+};
+
+void print_linklist(node** head){
+    node* curr = *head;
+    int i=0;
+    while(curr!=NULL){
+        cout << "node " << i << ": " << curr->data << "     ";
+        curr = curr->next;
+        i++; 
+    }
+    cout << endl;
+}
+
+void insert_helper(node** head, int x){
+    node* curr = *head;
+    while(curr->next != NULL){ //important condition. curr->next not curr
+        curr = curr->next;
+    }
+    node* fourth=new node();
+    fourth->data=x;
+    fourth->next=NULL;
+    curr->next=fourth;
+}
+
+void insertatk_helper(node** head, int pos, int x){
+    node* curr = *head;
+    node* newnode=new node();
+    newnode->data=x;
+    int counter=0;
+
+    if(pos==0){
+        newnode->next=*head;
+        *head = newnode;
+    }
     
+    else if(pos!=0){
+        while(curr->next!=NULL){
+            curr=curr->next;
+            counter++;
+            if(counter==pos-1){ //important condition.
+                newnode->next=curr->next;
+                curr->next=newnode;
+            }
+        }
+    }
+}
+
+void insert_linklist(){
+    node* head=new node();
+    node* second=new node();
+    node* third=new node();
+
+    head->data=33;
+    head->next=second;
+    second->data=44;
+    second->next=third;
+    third->data=55;
+    third->next=NULL;
+
+    insert_helper(&head, 77);
+    insertatk_helper(&head, 0, 66);
+    print_linklist(&head);
 }
 
 int main()
@@ -541,7 +620,10 @@ int main()
     // nextsmallestright();
 
     // MULTI-THREADING
-    multithreading1();
+    // multithreading1();
+
+    // LINKED-LIST
+    insert_linklist();
 
 
     return 0;
