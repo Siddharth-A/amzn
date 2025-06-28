@@ -1,4 +1,16 @@
 #!/bin/bash
 
-g++ intro2.cpp --std=c++11 -o test
-./test
+GREEN='\033[32m'
+RED='\033[31m'
+NC='\033[0m'
+
+if [ $# -eq 0 ]; then
+    echo -e "${RED}Usage: ./makee <filename.cpp>${NC}"
+    exit 1
+fi
+
+g++ $1 --std=c++11 -o ${1%.cpp}
+echo -e "${GREEN}Compilation completed! Running ${1%.cpp}...${NC}"
+echo -e "${GREEN}--------------------------------${NC}"
+./${1%.cpp}
+echo -e "${GREEN}Script completed!${NC}" 

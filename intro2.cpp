@@ -311,8 +311,9 @@ for e.x.: find the kth largest element in the array
 max-heap: max value is sorted from top to bottom. hence, when asked 3rd smallest,
 limit size of maxheap to 3 and sort throuh input. maxheap.top will be k smallest
 
-min-heap: min value is sorted from top to bottom. hence, when asked 3rd largest,
-limit size of minheap to 3 and sort throuh input. minheap.top will be k largest
+min-heap: min value is sorted from top to bottom. largest value is at the top.
+hence, when asked 3rd largest, limit size of minheap to 3 and sort throuh input. 
+minheap.top will be k largest.
 
 */
 void kthlargestelement(){
@@ -327,6 +328,12 @@ void kthlargestelement(){
     }
     cout << k << "th largest element: " << minheap.top() << endl;
 }
+// 15
+// 15 20
+// 3 15 20
+// 3 4 15 20
+// 3 4 10 15
+// 3 4 7 10
 
 void kthsmallestelement(){
     vector<int> input2 = {7,10,4,3,20,15};
